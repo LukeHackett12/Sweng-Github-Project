@@ -1,4 +1,4 @@
 {
-  "appService.defaultWebAppToDeploy": "/subscriptions/0d62e55f-07d3-4ef7-a088-d12b170b0f1c/resourceGroups/twilio/providers/Microsoft.Web/sites/github-game",
-  "appService.deploySubpath": ""
+  "appService.deploySubpath": "",
+  "appService.defaultWebAppToDeploy": "/subscriptions/0d62e55f-07d3-4ef7-a088-d12b170b0f1c/resourceGroups/appsvc_windows_centralus/providers/Microsoft.Web/sites/github-game"
 }
