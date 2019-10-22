@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "devstart": "nodemon app.js"
+    "devstart": "nodemon app.js",
+    "start" : "node app.js"
   },
   "dependencies": {
     "babylonjs": "^4.0.3",
