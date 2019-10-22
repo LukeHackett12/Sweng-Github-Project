@@ -1,3 +1,4 @@
+
 var canvas = document.getElementById("renderCanvas");
 var createScene = function () {
   var scene = new BABYLON.Scene(engine);
