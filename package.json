@@ -1,0 +1,19 @@
+{
+  "name": "sweng-github-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LukeHackett12/Sweng-Github-Game.git"
+  },
+  "author": "Luke Hackett",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LukeHackett12/Sweng-Github-Game/issues"
+  },
+  "homepage": "https://github.com/LukeHackett12/Sweng-Github-Game#readme"
+}
