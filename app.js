@@ -9,7 +9,7 @@ require('dotenv').config({ path: './secrets.env'});
 var githubOAuth = require('github-oauth')({
   githubClient: process.env.CLIENT_ID,
   githubSecret: process.env.CLIENT_SECRET,
-  baseURL: 'http://localhost:' + process.env.port,
+  baseURL: process.env.BASE_URL + process.env.port,
   loginURI: '/auth/github',
   callbackURI: '/auth/github/callback'
 })
