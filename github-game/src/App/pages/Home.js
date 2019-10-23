@@ -5,7 +5,7 @@ class Home extends Component {
   render() {
     return (
       <div className="App">
-        <Button variant="dark" href="https://github.com/login/oauth/authorize?client_id=4624130b0edc83c140cc&redirect_uri=http://localhost:5000/oauth/redirect">Login With Github</Button>
+        <Button variant="dark" href="/auth/github">Login With Github</Button>
       </div>
     );
   }

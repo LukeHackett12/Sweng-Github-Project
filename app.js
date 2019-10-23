@@ -6,6 +6,14 @@ var axios = require('axios');
 
 require('dotenv').config({ path: './secrets.env'});
 
+var githubOAuth = require('github-oauth')({
+  githubClient: process.env.CLIENT_ID,
+  githubSecret: process.env.CLIENT_SECRET,
+  baseURL: 'http://localhost:' + process.env.port,
+  loginURI: '/auth/github',
+  callbackURI: '/auth/github/callback'
+})
+
 app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'github-game/build')));
 
@@ -17,27 +25,23 @@ app.get("/config", (req, res) => {
   res.send(req.connection.remoteAddress);
 });
 
-app.get('/oauth/redirect', (req, res) => {
-  // The req.query object has the query params that
-  // were sent to this route. We want the `code` param
-  const requestToken = req.query.code
-  axios({
-    // make a POST request
-    method: 'post',
-    // to the Github authentication API, with the client ID, client secret
-    // and request token
-    url: `https://github.com/login/oauth/access_token?client_id=${process.env.CLIENT_ID}&client_secret=${process.env.CLIENT_SECRET}&code=${requestToken}`,
-    // Set the content type header, so that we get the response in JSOn
-    headers: {
-      accept: 'application/json'
-    }
-  }).then((response) => {
-    // Once we get the response, extract the access token from
-    // the response body
-    const accessToken = response.data.access_token
-    // redirect the user to the welcome page, along with the access token
-    res.redirect(`/?access_token=${accessToken}`)
-  })
+app.get("/auth/github", function(req, res){
+  console.log("started oauth");
+  return githubOAuth.login(req, res);
+});
+
+app.get("/auth/github/callback", function(req, res){
+  console.log("received callback");
+  return githubOAuth.callback(req, res);
+});
+
+
+githubOAuth.on('error', function(err) {
+  console.error('there was a login error', err)
+})
+
+githubOAuth.on('token', function(token, serverResponse) {
+  serverResponse.end(JSON.stringify(token))
 })
 
 const port = process.env.PORT || 5000;
