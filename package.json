@@ -3,13 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "devstart": "nodemon app.js",
+    "devstart": "cd github-game && npm run build && cd .. && nodemon app.js",
     "start": "node app.js"
   },
   "dependencies": {
+    "axios": "^0.19.0",
     "babylonjs": "^4.0.3",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "dotenv": "^8.2.0",
     "express": "~4.16.1",
     "gulp": "^4.0.2",
     "http-errors": "~1.6.3",
