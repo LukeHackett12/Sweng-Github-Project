@@ -43,6 +43,21 @@ class App extends Component {
 
         var redirect = process.env.REACT_APP_BASE_URL + ":" + process.env.REACT_APP_PORT + "/auth/github/callback";
 
+        let list
+        if(this.state.repositories === null){
+            list = <ul></ul>
+        }
+        else {
+            list = 
+            <ul>
+                {
+                    JSON.parse(this.state.repositories).map((item, key) => {
+                        return <li key={key}>{item.name} {item.url}</li>
+                    })
+                }
+            </ul>
+        }
+
         return (
             <div className="App">
                 <header className="App-header">
@@ -58,7 +73,7 @@ class App extends Component {
                 <p className="App-intro">{this.state.access_token}</p>
                 <div>
                     <Button onClick={this.getRepos()}>Get repositories</Button>
-                    <p>{this.state.repositories}</p>
+                    {list}
                 </div>
             </div>
         );
