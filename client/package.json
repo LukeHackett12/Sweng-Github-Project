@@ -5,17 +5,26 @@
   "dependencies": {
     "@babylonjs/core": "^4.0.3",
     "@babylonjs/loaders": "^4.0.3",
+    "@octokit/rest": "^16.34.0",
     "@types/cannon": "^0.1.4",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "gitstar-components": "^1.0.5",
+    "node-fetch": "^2.6.0",
     "react": "^16.4.2",
     "react-babylonjs": "^2.0.1",
+    "react-bootstrap": "^1.0.0-beta.14",
     "react-dom": "^16.4.2",
+    "react-oauth-flow": "^1.2.0",
     "react-reconciler": "^0.23.0",
-    "react-scripts": "1.1.5"
+    "react-scripts": "1.1.5",
+    "webpack": "^4.41.2"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "devDependencies": {}
 }

@@ -1,36 +1,65 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
-import DefaultPlayground from "./demo";
+import { OauthSender } from 'react-oauth-flow';
+import { Button } from 'react-bootstrap';
 import "./App.css";
 
-class App extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { apiResponse: "" };
-    }
+import {STATUS} from "gitstar-components";
 
-    callAPI() {
-        fetch("http://localhost:9000/testAPI")
-            .then(res => res.text())
-            .then(res => this.setState({ apiResponse: res }))
-            .catch(err => err);
+const fetch = require('node-fetch');
+
+class App extends Component {
+
+    state = {
+        status: STATUS.INITIAL,
+        access_token: null,
+        repositories: null
+    };
+
+    getRepos(){
+        fetch("http://localhost:9000/githubApi/repos?access_token=" + this.state.access_token)
+                .then(res => res.text())
+                .then(res => this.setState({ repositories: res }))
+                .catch(err => err);
     }
 
     componentDidMount() {
-        this.callAPI();
-    }
+        const code =
+          window.location.href.match(/\?code=(.*)/) &&
+          window.location.href.match(/\?code=(.*)/)[1];
+        console.log(code);
+
+        if (code) {
+            this.setState({ status: STATUS.LOADING });
+            fetch("http://localhost:9000/githubApi/token?code=" + code)
+                .then(res => res.text())
+                .then(res => this.setState({ access_token: res.split('&')[0].match(/access_token=(.*)/)[1]}))
+                .catch(err => err);
+        }
+      }
 
     render() {
+        require('dotenv').config({ path: 'secrets.env' })
+
+        var redirect = process.env.REACT_APP_BASE_URL + ":" + process.env.REACT_APP_PORT + "/auth/github/callback";
+
         return (
             <div className="App">
                 <header className="App-header">
                     <img src={logo} className="App-logo" alt="logo" />
                     <h1 className="App-title">Welcome to React</h1>
                 </header>
-                <p className="App-intro">{this.state.apiResponse}</p>
-                <p>
-                    <DefaultPlayground />
-                </p>
+                <OauthSender
+                    authorizeUrl="https://www.github.com/login/oauth/authorize"
+                    clientId={process.env.REACT_APP_CLIENT_ID}
+                    redirectUri={redirect}
+                    render={({ url }) => <Button href={url}>Connect to Github</Button>}
+                />
+                <p className="App-intro">{this.state.access_token}</p>
+                <div>
+                    <Button onClick={this.getRepos()}>Get repositories</Button>
+                    <p>{this.state.repositories}</p>
+                </div>
             </div>
         );
     }
