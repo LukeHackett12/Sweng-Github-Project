@@ -16,5 +16,5 @@ class DefaultPlayground extends React.Component {
         )
     }
 }
-  
+
 export default DefaultPlayground
