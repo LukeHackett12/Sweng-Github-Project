@@ -1,0 +1,38 @@
+.Home {
+  text-align: center;
+  background-color: #222;
+}
+
+.Home-logo {
+  animation: Home-logo-spin-one infinite 5s linear;
+}
+
+.Home-header {
+  color: white;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 2em;
+  font-style: italic
+}
+
+.Home-title {
+  font-size: 1.5em;
+  color: white;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%)
+}
+
+.Home-intro {
+  font-size: large;
+}
+
+.Home-login {
+  text-align: center;
+}
+
+@keyframes Home-logo-spin-one {
+  33% { transform: rotate(15deg); }
+  66% { transform: rotate(-15deg); }
+  100% { transform: rotate(0deg); }
+}

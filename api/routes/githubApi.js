@@ -81,7 +81,7 @@ router.get('/profileUpsert', async (req, res) => {
               });
         }); 
 */
-
+/*
     const MongoClient = require('mongodb').MongoClient;
     const uri = "mongodb+srv://default:" + process.env.MONGO_PASS + "@github-game-adryd.azure.mongodb.net/github-game?retryWrites=true&w=majority";
 
@@ -102,7 +102,7 @@ router.get('/profileUpsert', async (req, res) => {
             }
         );
     }); 
-
+*/
     res.send(counts);
 });
 
