@@ -1,28 +1,24 @@
 import React, { Component } from "react";
 import JSONPretty from 'react-json-pretty';
-import axios from 'axios';
-
+import cookie from 'react-cookies'
 import "./Profile.css";
 
+const axios = require('axios').create({ withCredentials: true });
 
 class Profile extends Component {
-
     state = {
-        access_token: null,
-        repositories: null,
         profile: null,
         status: "initial",
     };
 
     startGame(){
-        console.log("hser");
-        this.props.history.push("play/" + this.state.access_token);
+        this.props.history.push("play/");
     }
 
     upsertProfile(){
         this.setState({status : "loading"});
 
-        axios.get("http://localhost:9000/githubApi/profileUpsert?access_token=" + this.state.access_token)
+        axios.get("http://localhost:9000/githubApi/profileUpsert", {withCredentials: true})
                 .then(res => {this.setState({ profile: res.data, status: "finished" })})
                 .then(() => {this.startGame()})
                 .catch(err => err);
@@ -32,12 +28,10 @@ class Profile extends Component {
         const code =
             window.location.href.match(/\?code=(.*)/) &&
             window.location.href.match(/\?code=(.*)/)[1];
-        console.log(code);
-
         if (code) {
             fetch("http://localhost:9000/githubApi/token?code=" + code)
                 .then(res => res.text())
-                .then(res => this.setState({ access_token: res.split('&')[0].match(/access_token=(.*)/)[1]}))
+                .then(res => cookie.save('access_token', res.split('&')[0].match(/access_token=(.*)/)[1], { path: '/' }))
                 .catch(err => err);
         }
     }

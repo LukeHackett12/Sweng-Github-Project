@@ -18,7 +18,7 @@ const routing = (
     <Switch>
       <Route exact path="/" component={Home} />
       <Route exact path="/profile" component={Profile} />
-      <Route path="/play/:id" component={Play} />
+      <Route exact path="/play" component={Play} />
     </Switch>
   </BrowserRouter>
 )
