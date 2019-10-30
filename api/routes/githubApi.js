@@ -1,7 +1,7 @@
 var express = require("express");
 var router = express.Router();
 
-const axios = require('axios');
+const axios = require('axios').create({ withCredentials: true });
 
 router.get('/token', (req, res) => {
     var url ='https://www.github.com/login/oauth/access_token?client_id=' + process.env.CLIENT_ID + '&client_secret=' + process.env.CLIENT_SECRET + '&code=' + req.param("code");
@@ -16,47 +16,42 @@ router.get('/token', (req, res) => {
     })
 });
 
-router.get('/repos', (req, res) => {
-    axios.get("https://api.github.com/user/repos?access_token=" + req.param("access_token"))
-    .then(({ data }) => {
-        res.send(data);
-        console.log("Repo list sent");
-    });
-});
-
 router.get('/profileUpsert', async (req, res) => {
+    var cookies = req.cookies;
+    console.log("Cookies: " + cookies)
+
     let user;
-    await axios.get("https://api.github.com/user?access_token=" + req.param("access_token"))
+    await axios.get("https://api.github.com/user?access_token=" + cookies.access_token)
     .then(({ data }) => {
         user=data.id;
     });
 
     let repos;
-    await axios.get("https://api.github.com/user/repos?access_token=" + req.param("access_token"))
+    await axios.get("https://api.github.com/user/repos?access_token=" + cookies.access_token)
     .then(({ data }) => {
         repos=data;
     });
 
     let events;
-    await axios.get("https://api.github.com/events?access_token=" + req.param("access_token"))
+    await axios.get("https://api.github.com/events?access_token=" + cookies.access_token)
     .then(({ data }) => {
         events=data;
     });
 
     let starred;
-    await axios.get("https://api.github.com/user/starred?access_token=" + req.param("access_token"))
+    await axios.get("https://api.github.com/user/starred?access_token=" + cookies.access_token)
     .then(({ data }) => {
         starred=data;
     });
 
     let followers;
-    await axios.get("https://api.github.com/user/followers?access_token=" + req.param("access_token"))
+    await axios.get("https://api.github.com/user/followers?access_token=" + cookies.access_token)
     .then(({ data }) => {
         followers=data;
     });
 
     let following;
-    await axios.get("https://api.github.com/user/following?access_token=" + req.param("access_token"))
+    await axios.get("https://api.github.com/user/following?access_token=" + cookies.access_token)
     .then(({ data }) => {
         following=data;
     });
