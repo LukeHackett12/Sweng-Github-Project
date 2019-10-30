@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import JSONPretty from 'react-json-pretty';
-import cookie from 'react-cookies'
 import "./Profile.css";
 
 const axios = require('axios').create({ withCredentials: true });
@@ -12,7 +11,8 @@ class Profile extends Component {
     };
 
     startGame(){
-        this.props.history.push("play/");
+        var handleToUpdate  =   this.props.handleToUpdate;
+        handleToUpdate("play");
     }
 
     upsertProfile(){
@@ -22,18 +22,6 @@ class Profile extends Component {
                 .then(res => {this.setState({ profile: res.data, status: "finished" })})
                 .then(() => {this.startGame()})
                 .catch(err => err);
-    }
-
-    componentDidMount() {
-        const code =
-            window.location.href.match(/\?code=(.*)/) &&
-            window.location.href.match(/\?code=(.*)/)[1];
-        if (code) {
-            fetch("http://localhost:9000/githubApi/token?code=" + code)
-                .then(res => res.text())
-                .then(res => cookie.save('access_token', res.split('&')[0].match(/access_token=(.*)/)[1], { path: '/' }))
-                .catch(err => err);
-        }
     }
 
     /*

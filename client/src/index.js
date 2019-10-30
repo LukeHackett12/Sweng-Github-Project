@@ -1,18 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Home from './routes/Home';
-import Profile from './routes/Profile';
-import Play from './routes/Play';
+import App from './App'
 import registerServiceWorker from './registerServiceWorker';
 
-import {
-  BrowserRouter,
-  Switch,
-  Route
-} from "react-router-dom";
-
-
+/*
 const routing = (
   <BrowserRouter>
     <Switch>
@@ -22,7 +14,8 @@ const routing = (
     </Switch>
   </BrowserRouter>
 )
+*/
 
-ReactDOM.render(routing, document.getElementById('root'))
+ReactDOM.render(<App />, document.getElementById('root'))
 
 registerServiceWorker();
