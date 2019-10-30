@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import JSONPretty from 'react-json-pretty';
 import axios from 'axios';
-import {STATUS} from "gitstar-components";
 
 import "./Profile.css";
 
@@ -12,14 +11,20 @@ class Profile extends Component {
         access_token: null,
         repositories: null,
         profile: null,
-        status: STATUS.INITIAL,
+        status: "initial",
     };
 
+    startGame(){
+        console.log("hser");
+        this.props.history.push("play/" + this.state.access_token);
+    }
+
     upsertProfile(){
-        this.setState({status : STATUS.LOADING});
+        this.setState({status : "loading"});
 
         axios.get("http://localhost:9000/githubApi/profileUpsert?access_token=" + this.state.access_token)
-                .then(res => {this.setState({ profile: res.data, status: STATUS.FINISHED_LOADING })})
+                .then(res => {this.setState({ profile: res.data, status: "finished" })})
+                .then(() => {this.startGame()})
                 .catch(err => err);
     }
 
@@ -47,16 +52,16 @@ class Profile extends Component {
 
     render() {
         let button;
-        if(STATUS.INITIAL === this.state.status){
+        if("initial" === this.state.status){
             button = 
-            <button class="btn btn-dark" type="button" onClick={() => this.upsertProfile()}>
+            <button className="btn btn-dark" type="button" onClick={() => this.upsertProfile()}>
             Generate Profile
           </button>
         } 
-        else if(STATUS.LOADING === this.state.status){
+        else if("loading" === this.state.status){
             button = 
-            <button class="btn btn-dark" type="button" disabled>
-              <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <button className="btn btn-dark" type="button" disabled>
+              <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
               Loading...
             </button>
         } 

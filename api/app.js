@@ -13,7 +13,7 @@ var app = express();
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
-require('dotenv').config({ path: './secrets.env' })
+require('dotenv').config({ path: './.env' })
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));

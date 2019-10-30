@@ -3,23 +3,26 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import Home from './routes/Home';
 import Profile from './routes/Profile';
+import Play from './routes/Play';
 import registerServiceWorker from './registerServiceWorker';
 
 import {
-    BrowserRouter as Router,
-    Route
-  } from "react-router-dom";
+  BrowserRouter,
+  Switch,
+  Route
+} from "react-router-dom";
 
 
-  const routing = (
-    <Router>
-      <div>
-        <Route exact path="/" component={Home} />
-        <Route path="/profile" component={Profile} />
-      </div>
-    </Router>
-  )
-  
-  ReactDOM.render(routing, document.getElementById('root'))
+const routing = (
+  <BrowserRouter>
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route exact path="/profile" component={Profile} />
+      <Route path="/play/:id" component={Play} />
+    </Switch>
+  </BrowserRouter>
+)
+
+ReactDOM.render(routing, document.getElementById('root'))
 
 registerServiceWorker();

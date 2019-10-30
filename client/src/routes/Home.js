@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import logo from "../Octocat/Octocat.svg";
 import { GithubLoginButton } from "react-social-login-buttons";
 import "./Home.css";
-import "../index.css";
 
 class Home extends Component {
 
@@ -12,9 +11,8 @@ class Home extends Component {
     }
 
     render() { 
-        require('dotenv').config({ path: 'secrets.env' })
-        return (
-            <div className="Home body index-body">
+            return (
+            <div className="Home">
                 <h2 className="Home-header">Github Warrior</h2>
                 <div className="Home-title">
                     <img src={logo} className="Home-logo" alt="logo" />
