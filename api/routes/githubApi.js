@@ -56,15 +56,13 @@ router.get('/profileUpsert', async (req, res) => {
         following=data;
     });
 
-    console.log("Got all stats");
-
-    var counts = 
+    var info = 
     {github_id : user,
-    repos : repos.length, //Attack
-    events : events.length, //Agility
-    starred : starred.length, //Health
-    followers : followers.length, //---¬
-    following : following.length}; //-----Armor
+    repos : repos,
+    events : events,
+    starred : starred,
+    followers : followers,
+    following : following}; 
 
 
 /*
@@ -98,7 +96,7 @@ router.get('/profileUpsert', async (req, res) => {
         );
     }); 
 */
-    res.send(counts);
+    res.send(info);
 });
 
 module.exports = router;
