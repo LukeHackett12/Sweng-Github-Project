@@ -1,25 +1,75 @@
 import React, { Component } from "react";
+import Typist from 'react-typist'
+import TypistLoop from 'react-typist-loop'
+import D3 from "./D3"
 import "./Magic.css";
+
+import { Row, Col } from 'react-bootstrap';
+
+const imgStye = {
+    borderRadius: "50%",
+    width: "250px",
+    height: "250px"
+  };
 
 class Profile extends Component {
     render() { 
-            return (
-                <div class="flexContainer flexColumn fullHeight">
-                    <div class="flexContainer flexItem">
-                        <aside class="sidebar sidebarLeft card pt-1 pd-1 pl-1 pr-1">
-                            <h2>Left Sidebar</h2>
-                            <p>Put your content here</p>
-                        </aside>
-                        <main class="flexItem whiteBackground main card  pt-1 pd-1 pl-1 pr-1">
-                            <div>
-                                {JSON.stringify(this.props.repos)}
-                            </div> 
-                        </main>
-                        <aside class="sidebar sidebarRight card pt-1 pd-1 pl-1 pr-1">
-                            {JSON.stringify(this.props.profile)}
-                        </aside>
+        return (
+            <Row className="show-grid d-flex flex-row">
+              <Col xs={12} className="d-flex flex-column">
+                <div className="d-flex flex-row">  
+                    <div className="justify-content-left ml-5">
+                        <div className="d-flex flex-column">
+                        {this.props.avatar_url ?
+                            <img src={this.props.avatar_url}
+                                alt="Profile"
+                                style={imgStye}/> : null }
+                        </div>
+                        <br/>
+                        <div className="d-flex flex-column center">
+                            {this.props.profile_url ? <div><p><a className="btn btn-info" href={this.props.profile_url} target="_blank">View on GitHub</a></p></div> : null }
+                        </div>
+                    </div>
+                    <div className="d-flex justify-content-center bigWhite">
+                        <div className="d-flex flex-column">
+                            <TypistLoop interval={3000}>
+                                {[
+                                this.props.name
+                                ].map(text => <Typist key={text} startDelay={1000}>{text}</Typist>)}
+                            </TypistLoop>
+                        </div>
                     </div>
                 </div>
+              </Col>
+              <Col xs={12} md={3} className="card cardColor ml-4 shadow">
+                <div className="card-body text-white">
+                    <Col xs={12}>
+                        <div>
+                            <b>Starred</b>
+                            {
+                                Object.entries(this.props.starred).map(([key,eachitem]) =>
+                                <div key={key}>
+                                    <p><a href={eachitem.html_url}>{eachitem.full_name}</a> - {eachitem.description.substring(0, 50) + "..."}</p>
+                                </div> ) 
+                            }
+                        </div>
+                    </Col>
+                </div>
+              </Col>
+              <Col className="card flex-column cardColor ml-2 shadow">
+                <div className="card-body text-white">
+                    <Col xs={12}>
+                        <div>
+                            <b><i>Visualizations</i></b>
+                            <D3 repos={this.props.repos}
+                                following={this.props.following}
+                                followers={this.props.followers}
+                                events={this.props.events}/>
+                        </div>
+                    </Col>
+                </div>
+              </Col>
+            </Row>
         );
     }
 }

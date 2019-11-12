@@ -10,8 +10,14 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { screen: "home",
-                    profile: null,
-                    repos: null
+                    avatar_url: null,
+                    profile_url: null,
+                    name: null,
+                    repos : null,
+                    events : null,
+                    starred : null,
+                    followers : null,
+                    following : null,
                  };
   }
 
@@ -19,7 +25,9 @@ class App extends React.Component {
     this.setState( { screen: s } )
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    console.log(window.location.href);
+
     const code =
         window.location.href.match(/\?code=(.*)/) &&
         window.location.href.match(/\?code=(.*)/)[1];
@@ -27,14 +35,24 @@ class App extends React.Component {
     if (code) {
         this.setState({ screen : "loading" })
 
-        axios.get("http://localhost:9000/githubApi/token?code=" + code)
-            .then(res => res.text())
-            .then(res => cookie.save('access_token', res.split('&')[0].match(/access_token=(.*)/)[1], { path: '/' }))
+        await axios.get("http://localhost:9000/githubApi/token?code=" + code)
+            .then(res => res.data)
+            .then(res => res.split('&')[0])
+            .then(res => cookie.save('access_token', res.match(/access_token=(.*)/)[1], { path: '/' }))
+            .then(console.log(cookie.access_token))
             .catch(err => err);
 
-        axios.get("http://localhost:9000/githubApi/profileUpsert", {withCredentials: true})
-        .then(res => {this.setState({ profile: res.data.followers, repos: res.data.repos, status: "finished" })})
-        .then(() => {this.setState({ screen : "profile" })})
+        await axios.get("http://localhost:9000/githubApi/profileUpsert", {withCredentials: true})
+        .then(res => {this.setState({ avatar_url: res.data.avatar_url,
+                                      profile_url: res.data.profile_url,
+                                      name: res.data.name,
+                                      repos : res.data.repos,
+                                      events : res.data.events,
+                                      starred : res.data.starred,
+                                      followers : res.data.followers,
+                                      following : res.data.following,
+                                      status: "finished", 
+                                      screen : "profile" })})
         .catch(err => err);
     }
   }
@@ -49,7 +67,14 @@ class App extends React.Component {
           <Loading />
         )}
         {this.state.screen === "profile" && (
-          <Profile profile={this.state.profile} repos={this.state.repos}/>
+          <Profile avatar_url={this.state.avatar_url} 
+                  profile_url={this.state.profile_url}
+                  name={this.state.name}
+                  repos={this.state.repos}
+                  events={this.state.events}
+                  starred={this.state.starred}
+                  followers={this.state.followers}
+                  following={this.state.following}/>
         )}
       </div>
     );
