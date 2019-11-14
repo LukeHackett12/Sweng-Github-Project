@@ -13,6 +13,25 @@ const imgStye = {
   };
 
 class Profile extends Component {
+
+    countReposOverTime(repos){
+        let listDates = [];
+        repos.forEach((eachitem) =>{
+            listDates.push(eachitem.created_at.split('T')[0]);
+        })
+
+        listDates.sort();
+
+        let sorted = []
+        listDates.forEach((date, i) => {
+            sorted.push({date: date, value: i+1})
+        })
+
+        console.log(sorted);
+
+        return sorted;
+    }
+
     render() { 
         return (
             <Row className="show-grid d-flex flex-row">
@@ -61,10 +80,13 @@ class Profile extends Component {
                     <Col xs={12}>
                         <div>
                             <b><i>Visualizations</i></b>
-                            <D3 repos={this.props.repos}
+                            <br/>
+                            <D3 repoDates={this.countReposOverTime(this.props.repos)}
                                 following={this.props.following}
                                 followers={this.props.followers}
-                                events={this.props.events}/>
+                                events={this.props.events}
+                                size={[700,700]}
+                                />
                         </div>
                     </Col>
                 </div>
