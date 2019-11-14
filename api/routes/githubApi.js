@@ -23,36 +23,42 @@ router.get('/profileUpsert', async (req, res) => {
     await axios.get("https://api.github.com/user?access_token=" + cookies.access_token)
     .then(({ data }) => {
         user=data;
+        console.log("user");
     });
 
     let repos;
     await axios.get("https://api.github.com/user/repos?access_token=" + cookies.access_token)
     .then(({ data }) => {
         repos=data;
+        console.log("repos");
     });
 
     let events;
-    await axios.get("https://api.github.com/events?access_token=" + cookies.access_token)
+    await axios.get("https://api.github.com/users/" + user.login + "/events")
     .then(({ data }) => {
         events=data;
+        console.log("events");
     });
 
     let starred;
     await axios.get("https://api.github.com/user/starred?access_token=" + cookies.access_token)
     .then(({ data }) => {
         starred=data;
+        console.log("starred");
     });
 
     let followers;
     await axios.get("https://api.github.com/user/followers?access_token=" + cookies.access_token)
     .then(({ data }) => {
         followers=data;
+        console.log("followers");
     });
 
     let following;
     await axios.get("https://api.github.com/user/following?access_token=" + cookies.access_token)
     .then(({ data }) => {
         following=data;
+        console.log("following");
     });
 
     var info = 

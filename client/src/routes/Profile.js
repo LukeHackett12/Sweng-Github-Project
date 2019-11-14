@@ -14,9 +14,9 @@ const imgStye = {
 
 class Profile extends Component {
 
-    countReposOverTime(repos){
+    countOverTime(list){
         let listDates = [];
-        repos.forEach((eachitem) =>{
+        list.forEach((eachitem) =>{
             listDates.push(eachitem.created_at.split('T')[0]);
         })
 
@@ -27,9 +27,29 @@ class Profile extends Component {
             sorted.push({date: date, value: i+1})
         })
 
-        console.log(sorted);
-
         return sorted;
+    }
+
+    collateEvents(events){
+        let listDates = [];
+        events.forEach((eachitem) =>{
+            listDates.push(eachitem.created_at.split('T')[0]);
+        })
+
+        listDates.sort();
+
+        let mapCount = [];
+        listDates.forEach((eachitem) => {
+            if(eachitem in mapCount){
+                let count = mapCount[eachitem] + 1;
+                delete mapCount[eachitem];
+                mapCount[eachitem] = count;
+            } else {
+                mapCount[eachitem] = 1;
+            }
+        })
+
+        return mapCount;
     }
 
     render() { 
@@ -66,7 +86,7 @@ class Profile extends Component {
                         <div>
                             <b>Starred</b>
                             {
-                                Object.entries(this.props.starred).map(([key,eachitem]) =>
+                                Object.entries(this.props.starred.slice(0,12)).map(([key,eachitem]) =>
                                 <div key={key}>
                                     <p><a href={eachitem.html_url}>{eachitem.full_name}</a> - {eachitem.description.substring(0, 50) + "..."}</p>
                                 </div> ) 
@@ -81,11 +101,11 @@ class Profile extends Component {
                         <div>
                             <b><i>Visualizations</i></b>
                             <br/>
-                            <D3 repoDates={this.countReposOverTime(this.props.repos)}
+                            <D3 name={this.props.name}
+                                repoDates={this.countOverTime(this.props.repos)}
                                 following={this.props.following}
                                 followers={this.props.followers}
-                                events={this.props.events}
-                                size={[700,700]}
+                                events={this.collateEvents(this.props.events)}
                                 />
                         </div>
                     </Col>
