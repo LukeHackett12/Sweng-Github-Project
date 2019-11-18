@@ -1,0 +1,10 @@
+.Loading-logo {
+    animation: Loading-logo-spin-one infinite 5s linear;
+  }
+
+@keyframes Loading-logo-spin-one {
+    25% { transform: rotate(90deg); }
+    50% { transform: rotate(180deg); }
+    50% { transform: rotate(180deg); }
+    100% { transform: rotate(360deg); }
+}

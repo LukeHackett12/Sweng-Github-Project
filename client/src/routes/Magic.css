@@ -1,0 +1,75 @@
+.flexContainer {
+    display: flex;
+}
+.flexItem {
+    flex: 1;
+}
+.flexColumn {
+    flex-direction: column;
+}
+.fullHeight {
+    height: 100vh;
+}
+.justCent {
+    display: flex;
+    align-items: center;
+}
+.whiteBackground {
+    background: white;
+}
+.blueBackground {
+    background: lightskyblue;
+}
+.main{
+    order: 2;
+    padding: 20;
+    border-left: 1px solid #777777;
+    border-right: 1px solid #777777;
+}
+.sidebar {
+    width: 20%;
+    background: white;
+    padding: 20px;
+}
+.sidebarLeft{
+    order: 1;
+}
+.sidebarRight{
+    order: 3;
+}
+.textWhite{
+    color: white;
+    margin-left: 1%;
+    margin-right: 0%;
+}
+/* unvisited link */
+a:link {
+    color: #5BC0BE;
+  }
+  
+/* visited link */
+a:visited {
+color: #6FFFE9;
+}
+
+/* mouse over link */
+a:hover {
+color: #5BC0BE;
+}
+
+/* selected link */
+a:active {
+color: #1C2541;
+}
+.cardColor{
+    background-color: #3A506B;
+}
+.center{
+    margin-left: 7.5vh;
+}
+.bigWhite{
+    color: white;
+    font-size: 10vw;
+    margin-left: 4%;
+    margin-top: 2%;
+}
