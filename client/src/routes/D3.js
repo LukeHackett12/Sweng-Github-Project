@@ -12,15 +12,15 @@ class D3 extends Component {
          <div className="d-flex">
             <div className="d-flex flex-column">
                <div className="d-flex flex-row">
-                  <LineChart elementWidth={600} elementHeight={400} data={this.props.repoDates}/>
+                  <LineChart elementWidth={700} elementHeight={500} data={this.props.repoDates}/>
                </div>
                <div className="d-flex flex-row">
-                  <ScatterPlot elementWidth={600} elementHeight={400} data={this.props.events}/>
+                  <ScatterPlot elementWidth={700} elementHeight={500} data={this.props.events}/>
                </div>
             </div>
             <div className="d-flex flex-column">
             <div className="d-flex flex-row justify-content-center justCent">
-                  <SunburstChart elementWidth={600} elementHeight={600} name={this.props.name} followers={this.props.followers} following={this.props.following}/>
+                  <SunburstChart elementWidth={800} elementHeight={800} name={this.props.name} followers={this.props.followers} following={this.props.following}/>
                </div>
             </div>
          </div>
