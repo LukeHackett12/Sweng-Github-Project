@@ -8,13 +8,13 @@ This project uses ReactJS with an Express backend to scrape data from a github u
 
 ### Home Screen
 
-![Home Screen](https://imgur.com/C055uhG)
+![Home Screen](https://imgur.com/C055uhG.png)
 
 The Home Screen is quite simple. There is a title at the top, and a Github Octocat logo that swings side to side. Below the logo there is a login button that when clicked links to githubs OAuthV2 login system.
 
 ### Loading Screen
 
-![Loading Screen](https://imgur.com/jaGw3po)
+![Loading Screen](https://imgur.com/jaGw3po.png)
 
 Once you click on the login button you are redirected to Github. The reason you login instead of just searching for a user is so you cancount private repos in the data, as well as making the backend data queries easier.
 
@@ -24,13 +24,13 @@ Once the 'access_token' is saved as a cookie in the browser the frontend makes a
 
 ### Profile Screen
 
-![Profile Screen](https://imgur.com/9uT79Jr)
+![Profile Screen](https://imgur.com/9uT79Jr.png)
 
 This is the screen you are presented with once you are successfully logged in. The top of the page is taken up with the users profile picture and username. There is a sidebar that has the users starred repos and links to each of them. To the right is the main body of the webpage which is the graphs. They are rendered in a seperate ReactJS component and are talked about below.
 
 ### Graphs
 
-![Graphs](https://imgur.com/7kCXuSr)
+![Graphs](https://imgur.com/7kCXuSr.png)
 
 There are three graphs displayed here. The first of which is a line chart that maps how many repositories a user has created over time. The bubble chart below it is a measure of how many events the user has over the past week. Events are interactions with github such as repo creation, following or getting followed etc.. so this is agood measure of how frequently a user is on/using the site. Finally there is a sunburst chart that has the logged in user in the middle and shows all of their followers surrounding them.
 
