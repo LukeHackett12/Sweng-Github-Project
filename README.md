@@ -1,3 +1,3 @@
-# Sweng Github Game
+# Sweng Github Projec
 
-Game based on the Github api and user profiles
+Visualisations of Data based on a Github user
