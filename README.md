@@ -1,5 +1,8 @@
 # Sweng Github Project
 #### Visualisations of Data based on a Github Profile
+
+![Full Demo](https://imgur.com/SjSyeur.gif)
+
 # 
 
 ## Description
