@@ -9,7 +9,7 @@
     "@babylonjs/loaders": "^4.0.3",
     "@octokit/rest": "^16.34.0",
     "@types/cannon": "^0.1.4",
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "babylonjs": "^4.0.3",
     "babylonjs-gui": "^4.0.3",
     "bootstrap": "^4.3.1",
