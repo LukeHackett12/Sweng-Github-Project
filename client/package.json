@@ -47,7 +47,7 @@
     "react-typist": "^2.0.5",
     "react-typist-loop": "^0.0.5",
     "react-unity-webgl": "^7.1.8",
-    "three": "^0.109.0",
+    "three": "^0.125.0",
     "webpack": "^4.41.2"
   },
   "scripts": {
