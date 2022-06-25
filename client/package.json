@@ -19,7 +19,7 @@
     "dotenv": "^8.2.0",
     "gitstar-components": "^1.0.5",
     "moment": "^2.24.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.7",
     "p5": "^0.10.2",
     "plotly.js": "^1.51.1",
     "prop-types": "^15.7.2",
