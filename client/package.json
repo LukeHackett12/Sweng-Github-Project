@@ -18,7 +18,7 @@
     "d3": "^5.12.0",
     "dotenv": "^8.2.0",
     "gitstar-components": "^1.0.5",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "node-fetch": "^2.6.0",
     "p5": "^0.10.2",
     "plotly.js": "^1.51.1",
